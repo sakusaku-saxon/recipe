@@ -9,5 +9,6 @@
             <input type="text" name="freeword" placeholder="料理名,食材など">
             <input type="submit" name="submit" value="送信">
         </form>
+        <button onclick="location.href='category.php'">カテゴリ検索</button>
     </body>
 </html>

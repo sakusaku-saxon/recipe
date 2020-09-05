@@ -9,9 +9,9 @@
     <?php
         $Category = getCategory("hoge");
 
-        foreach($Category as $items){
+        foreach($Category as $items){          
+            echo $items["id"]." ";
             echo $items["name"]."<br>";
-            echo $items["id"]."<br>";
         }
     ?>
 </body>
@@ -22,16 +22,15 @@
         // リクエストURL
         $url = "https://app.rakuten.co.jp/services/api/Recipe/CategoryList/20170426?format=json&categoryType=large&applicationId=1017259887045805155";
 
-        // XMLをオブジェクトに代入
-        $json = file_get_contents($url);
-        $rakuten_json=json_decode($json, true);
-        var_dump($rakuten_json);
+        // APIから情報を取得
+        $contents = @file_get_contents($url);
+        $json = json_decode($contents, true);
 
         $results = array();
-        foreach($rakuten_json->result as $result){
+        foreach($json["result"]["large"] as $result){
             $results[] = array(
-                "name" => (string)$result->categoryName,
-                "id" => (string)$result->categoryId,
+                "name" => (string)$result["categoryName"],
+                "id" => (string)$result["categoryId"],
             );
         }
 
